@@ -13,5 +13,5 @@ export async function GET(
     return NextResponse.json({ error: 'date must use the format YYYY-MM-DD' }, { status: 400 });
   }
 
-  return NextResponse.json(getMeetings(date ?? undefined));
+  return NextResponse.json(await getMeetings(date ?? undefined));
 }

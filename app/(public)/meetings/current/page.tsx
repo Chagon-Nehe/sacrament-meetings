@@ -2,13 +2,13 @@ import { cacheLife } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { getMeetings } from '@/lib/meetings-db';
 import { getMostRecentSunday, toISODate } from '@/lib/dates';
-
+export const instant = false;
 async function getCurrentMeetingData() {
   'use cache';
   cacheLife('days');
   return {
     sunday: toISODate(getMostRecentSunday()),
-    meetings: getMeetings(),
+    meetings: await getMeetings(),
   };
 }
 
@@ -27,3 +27,7 @@ export default async function CurrentMeetingPage() {
 
   redirect('/meetings');
 }
+
+
+
+
