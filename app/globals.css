@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-brand: #1b3a4b;
+  --color-brand-dark: #12293a;
+  --color-brand-soft: #e3edf1;
+  --color-accent: #8c5a14;
+  --color-surface: #ffffff;
+  --color-page: #f3f5f6;
+  --color-ink: #1c2a33;
+  --color-muted: #52626d;
+  --color-line: #d3dce1;
+  --font-sans: var(--font-public-sans), system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  color: var(--color-brand);
+  line-height: 1.25;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: #000;
+  }
 }
