@@ -10,14 +10,14 @@ const MAIN_LINKS = [
   { href: '/meetings', label: 'Meetings' },
 ];
 
-async function getToday() {
+async function getCurrentTimestamp() {
   'use cache';
   cacheLife('days');
-  return formatLongDate(toISODate(new Date()));
+  return Date.now();
 }
 
 export default async function Header() {
-  const today = await getToday();
+  const today = formatLongDate(toISODate(new Date(await getCurrentTimestamp())));
   return (
     <header className="bg-brand text-white print:hidden">
       <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">

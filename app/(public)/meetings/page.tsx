@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Suspense } from 'react';
 import MeetingCard from '@/components/MeetingCard';
 import { MeetingSearch } from '@/components/MeetingSearch';
@@ -24,7 +25,15 @@ export default async function MeetingsPage(props: {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-3xl font-semibold">Meeting programs</h1>
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <h1 className="text-3xl font-semibold">Meeting programs</h1>
+        <Link
+          href="/meetings/new"
+          className="rounded bg-brand px-4 py-2 text-sm font-medium text-white hover:bg-brand-dark"
+        >
+          New program
+        </Link>
+      </div>
 
       <Suspense fallback={<div>Loading search...</div>}>
         <MeetingSearch />
@@ -33,7 +42,7 @@ export default async function MeetingsPage(props: {
       {meetings.length === 0 ? (
         <p className="text-muted">No programs have been planned yet.</p>
       ) : (
-        <ul className="grid grid-cols-2 gap-4 justify-center items-center bg-gray-100 p-4 mb-4">
+        <ul className="grid grid-cols-1 gap-4 bg-gray-100 p-4 mb-4 sm:grid-cols-2">
           {meetings.map((meeting) => (
             <li key={meeting.id}>
               <MeetingCard

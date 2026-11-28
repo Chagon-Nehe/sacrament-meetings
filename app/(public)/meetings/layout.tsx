@@ -5,6 +5,7 @@ import NavLinks from '@/components/NavLinks';
 const SECTION_LINKS = [
   { href: '/meetings', label: 'All programs' },
   { href: '/meetings/current', label: 'This Sunday' },
+  { href: '/meetings/new', label: 'New program' },
 ];
 
 export default function MeetingsLayout({ children }: { children: React.ReactNode }) {

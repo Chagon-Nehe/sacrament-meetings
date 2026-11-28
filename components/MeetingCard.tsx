@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { deleteMeeting } from '@/lib/actions';
 import type { SacramentMeeting } from '@/lib/types';
 import { formatLongDate } from '@/lib/dates';
 import { meetingTypeLabel } from '@/lib/meeting-utils';
@@ -13,8 +14,8 @@ export default function MeetingCard({ meeting, isCurrent = false }: MeetingCardP
   const musicCount = meeting.speakers.length - speakerCount;
 
   return (
-    <article className="rounded-lg border border-line bg-surface transition-shadow focus-within:shadow-md hover:shadow-md">
-      <Link href={`/meetings/${meeting.id}`} className="block rounded-lg p-5">
+    <article className="rounded-lg border border-line bg-surface p-5 transition-shadow focus-within:shadow-md hover:shadow-md">
+      <Link href={`/meetings/${meeting.id}`} className="block rounded-lg">
         <div className="mb-2 flex flex-wrap items-center gap-2">
           <h2 className="text-xl font-semibold">{formatLongDate(meeting.date)}</h2>
           {isCurrent && (
@@ -48,6 +49,20 @@ export default function MeetingCard({ meeting, isCurrent = false }: MeetingCardP
           </div>
         </dl>
       </Link>
+      <div className='mt-4 flex-col items-center gap-4'>
+        <form action={deleteMeeting.bind(null, meeting.id)} className="mt-4">
+        <button
+          type="submit"
+          aria-label={`Delete program for ${formatLongDate(meeting.date)}`}
+          className='inline-flex h-9 items-center justify-center rounded-md border border-red-200 bg-white px-3 text-sm font-medium leading-none text-red-600 shadow-sm transition-colors hover:border-red-300 hover:bg-red-50'
+        >
+          Delete
+        </button>
+        </form>
+        <Link href={`/meetings/${meeting.id}/edit`} className='inline-flex h-9 items-center justify-center rounded-md border border-slate-300 bg-white px-3 text-sm font-medium leading-none text-slate-700 shadow-sm transition-colors hover:bg-slate-50'>
+        Edit
+        </Link>
+      </div>  
     </article>
   );
 }
